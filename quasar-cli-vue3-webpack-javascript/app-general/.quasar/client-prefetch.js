@@ -72,12 +72,12 @@ export function addPreFetchHooks ({ router, publicPath }) {
       ))
       .map(m => m.c.__c !== void 0 ? m.c.__c.preFetch : m.c.preFetch)
 
-
+    
     if (appPrefetch !== false) {
       preFetchList.unshift(appPrefetch)
       appPrefetch = false
     }
-
+    
 
     if (preFetchList.length === 0) {
       return next()
@@ -89,15 +89,15 @@ export function addPreFetchHooks ({ router, publicPath }) {
       next(url)
     }
     const proceed = () => {
-
+      
       if (hasRedirected === false) { next() }
     }
 
-
+    
 
     preFetchList.reduce(
       (promise, preFetch) => promise.then(() => hasRedirected === false && preFetch({
-
+        
         currentRoute: to,
         previousRoute: from,
         redirect,
