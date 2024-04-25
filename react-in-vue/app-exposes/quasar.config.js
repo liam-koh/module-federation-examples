@@ -58,22 +58,21 @@ module.exports = configure(function (ctx) {
         cfg.entry = path.resolve(__dirname, './.quasar/main.js')
         cfg.plugins.push(
           new ModuleFederationPlugin({
-            name: 'layout',
-            remotes: {
-              // home: 'home@http://localhost:3002/remoteEntry.js',
-              home: 'home@http://quasar-sample-web.s3-website-ap-southeast-2.amazonaws.com/remoteEntry.js',
+          name: 'layout',
+          remotes: {
+            home: 'home@http://localhost:3002/remoteEntry.js',
+          },
+          shared: {
+            ...deps,
+            react: {
+              singleton: true,
+              requiredVersion: deps.react,
             },
-            shared: {
-              ...deps,
-              react: {
-                singleton: true,
-                requiredVersion: deps.react,
-              },
-              'react-dom': {
-                singleton: true,
-                requiredVersion: deps['react-dom'],
-              },
+            'react-dom': {
+              singleton: true,
+              requiredVersion: deps['react-dom'],
             },
+          },
           }),
         );
       },
