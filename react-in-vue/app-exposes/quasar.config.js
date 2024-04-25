@@ -58,16 +58,22 @@ module.exports = configure(function (ctx) {
         cfg.entry = path.resolve(__dirname, './.quasar/main.js')
         cfg.plugins.push(
           new ModuleFederationPlugin({
-            name: 'app_exposes',
-            filename: 'remoteEntry.js',
-            exposes: {
-              './HomePage.vue': './src/pages/IndexPage.vue',
-              './AppButton.vue': './src/components/AppButton.vue',
-              './AppList.vue': './src/components/AppList.vue'
+            name: 'layout',
+            remotes: {
+              // home: 'home@http://localhost:3002/remoteEntry.js',
+              home: 'home@http://localhost:3002/remoteEntry.js',
             },
             shared: {
-              ...dependencies,
-            }
+              ...deps,
+              react: {
+                singleton: true,
+                requiredVersion: deps.react,
+              },
+              'react-dom': {
+                singleton: true,
+                requiredVersion: deps['react-dom'],
+              },
+            },
           }),
         );
       },
