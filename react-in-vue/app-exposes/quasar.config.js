@@ -61,7 +61,7 @@ module.exports = configure(function (ctx) {
             name: 'layout',
             remotes: {
               // home: 'home@http://localhost:3002/remoteEntry.js',
-              home: 'home@http://localhost:3002/remoteEntry.js',
+              home: 'home@http://quasar-sample-web.s3-website-ap-southeast-2.amazonaws.com/remoteEntry.js',
             },
             shared: {
               ...deps,
