@@ -9,12 +9,22 @@
     <p>Count: {{ todoCount }} / {{ meta.totalCount }}</p>
     <p>Active: {{ active ? 'yes' : 'no' }}</p>
     <p>Clicks on todos: {{ clickCount }}</p>
+    <RemoteModuleRenderer 
+      :load-remote-module="loadRemoteModule"
+      :remote-props="{}"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { Todo, Meta } from './models';
+import RemoteModuleRenderer from './RemoteModuleRenderer.vue';
+
+const loadRemoteModule = async () => {
+  const res = (await import('home/Button')).default;
+  return res;
+};
 
 interface Props {
   title: string;
