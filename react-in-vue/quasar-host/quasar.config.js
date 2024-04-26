@@ -61,8 +61,8 @@ module.exports = configure(function (ctx) {
           new ModuleFederationPlugin({
             name: 'layout',
             remotes: {
-              // home: 'home@http://quasar-sample-web.s3-website-ap-southeast-2.amazonaws.com//remoteEntry.js',
-              home: 'home@http://localhost:3002/remoteEntry.js',
+              home: 'home@http://module-federation-example.s3-website-ap-southeast-2.amazonaws.com/remoteEntry.js',
+              // home: 'home@http://localhost:3002/remoteEntry.js',
             },
             shared: {
               ...deps,
@@ -99,7 +99,7 @@ module.exports = configure(function (ctx) {
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
       // chainWebpack (/* chain */) {}
     },
-
+    devtool: 'source-map',
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-devServer
     devServer: {
       server: {

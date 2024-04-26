@@ -6,6 +6,7 @@ const path = require('path');
 module.exports = {
   entry: './src/index',
   mode: 'development',
+  devtool: 'source-map',
   devServer: {
     static: {
       directory: path.join(__dirname, 'dist'),
@@ -14,6 +15,7 @@ module.exports = {
   },
   output: {
     publicPath: 'auto',
+    filename: '[name].[chunkhash].js',
   },
   module: {
     rules: [
