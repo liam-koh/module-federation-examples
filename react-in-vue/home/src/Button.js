@@ -1,4 +1,9 @@
 import React, { useEffect, useCallback } from 'react';
+import Jotai from './Jotai';
+import RQuery from './RQuery';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient({});
 
 export default ({ text = 'Home Button', onClick }) => {
   const onClickHandler = useCallback(() => {
@@ -13,5 +18,13 @@ export default ({ text = 'Home Button', onClick }) => {
 
   console.log('Button.js: rendered.');
 
-  return <button onClick={onClickHandler}>{text}</button>;
+  return (
+    <>
+      <QueryClientProvider client={queryClient}>  
+        <Jotai />
+        <RQuery />
+        <button onClick={onClickHandler}>{text}</button>
+      </QueryClientProvider>
+    </>
+  );
 };
