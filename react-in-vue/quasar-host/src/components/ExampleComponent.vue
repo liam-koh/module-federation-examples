@@ -9,9 +9,23 @@
     <p>Count: {{ todoCount }} / {{ meta.totalCount }}</p>
     <p>Active: {{ active ? 'yes' : 'no' }}</p>
     <p>Clicks on todos: {{ clickCount }}</p>
-    <RemoteModuleRenderer 
-      :load-remote-module="loadRemoteModule"
-      :remote-props="{}"
+    <button
+      @click="
+        () => {
+          openModal = true;
+        }
+      "
+    >
+      open modal
+    </button>
+
+    <ExampleModal
+      :isOpen="openModal"
+      @close="
+        () => {
+          openModal = false;
+        }
+      "
     />
   </div>
 </template>
@@ -20,21 +34,24 @@
 import { computed, ref } from 'vue';
 import { Todo, Meta } from './models';
 import RemoteModuleRenderer from './RemoteModuleRenderer.vue';
+import ExampleModal from './ExampleModal.vue';
 
 const loadRemoteModule = async () => {
   const res = (await import('home/Button')).default;
   return res;
 };
 
+const openModal = ref(false);
+
 interface Props {
   title: string;
   todos?: Todo[];
   meta: Meta;
   active: boolean;
-};
+}
 
 const props = withDefaults(defineProps<Props>(), {
-  todos: () => []
+  todos: () => [],
 });
 
 const clickCount = ref(0);
